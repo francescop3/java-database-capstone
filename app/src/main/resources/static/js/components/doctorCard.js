@@ -22,7 +22,7 @@ function createDoctorCard(doctor) {
 
     const appointmentTimes = document.createElement("ul");
 
-    doctor.availableAppointmentTimes.forEach(time => {
+    doctor.availableTimes.forEach(time => {
         const appointmentTime = document.createElement("li");
         appointmentTime.textContent = time;
         appointmentTimes.appendChild(appointmentTime);

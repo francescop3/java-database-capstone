@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.back_end.DTO.AppointmentDTO;
@@ -15,7 +14,7 @@ import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
 
-@Service
+@org.springframework.stereotype.Service
 public class AppointmentService {
     
     private final AppointmentRepository appointmentRepository;

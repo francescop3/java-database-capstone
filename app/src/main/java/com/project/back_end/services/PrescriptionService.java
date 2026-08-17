@@ -6,12 +6,11 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import com.project.back_end.models.Prescription;
 import com.project.back_end.repo.PrescriptionRepository;
 
-@Service
+@org.springframework.stereotype.Service
 public class PrescriptionService {
 
     private final PrescriptionRepository prescriptionRepository;

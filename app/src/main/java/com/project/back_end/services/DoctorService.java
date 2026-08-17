@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.back_end.models.Appointment;
@@ -14,7 +13,7 @@ import com.project.back_end.models.Doctor;
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 
-@Service
+@org.springframework.stereotype.Service
 public class DoctorService {
 
     private final DoctorRepository doctorRepository;
@@ -50,7 +49,7 @@ public class DoctorService {
                 .map(LocalDateTime::toLocalTime)
                 .toList();
 
-        return doctor.getAvailableAppointmentTimes().stream()
+        return doctor.getAvailableTimes().stream()
                 .filter(time -> {
                     LocalTime localTime = LocalTime.parse(time);
                     return !bookedTimes.contains(localTime);
@@ -152,7 +151,7 @@ public class DoctorService {
         String normalizedTime = time.toUpperCase();
 
         return doctors.stream()
-                .filter(doctor -> doctor.getAvailableAppointmentTimes()
+                .filter(doctor -> doctor.getAvailableTimes()
                         .stream()
                         .anyMatch(appointmentTime ->
                                 isTimePeriod(appointmentTime, normalizedTime)))

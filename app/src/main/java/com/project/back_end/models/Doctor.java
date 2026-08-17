@@ -140,11 +140,11 @@ public class Doctor {
         this.phone = phone;
     }
 
-    public List<String> getAvailableAppointmentTimes() {
+    public List<String> getAvailableTimes() {
         return availableTimes;
     }
 
-    public void setAvailableAppointmentTimes(List<String> availableTimes) {
+    public void setAvailableTimes(List<String> availableTimes) {
         this.availableTimes = availableTimes;
     }
 }
