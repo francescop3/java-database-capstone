@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.back_end.model.Admin;
+import com.project.back_end.models.Admin;
 import com.project.back_end.services.Service;
 
 @RestController
@@ -24,7 +24,7 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String,String>> adminLogin(@RequestBody Admin admin) {
+    public ResponseEntity<?> adminLogin(@RequestBody Admin admin) {
         return service.validateAdmin(
                 admin.getUsername(),
                 admin.getPassword()

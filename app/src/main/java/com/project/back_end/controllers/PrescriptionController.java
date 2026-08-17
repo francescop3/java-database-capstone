@@ -1,6 +1,6 @@
 package com.project.back_end.controllers;
 
-import com.project.back_end.entities.Prescription;
+import com.project.back_end.models.Prescription;
 import com.project.back_end.services.AppointmentService;
 import com.project.back_end.services.PrescriptionService;
 import com.project.back_end.services.Service;
@@ -41,11 +41,12 @@ public class PrescriptionController {
         }
 
         // Update appointment status
-        ResponseEntity<?> statusResponse =
-                appointmentService.changeStatus(
-                        prescription.getAppointmentId(),
-                        1
-                );
+        appointmentService.changeStatus(
+                prescription.getAppointmentId(),
+                1
+        );
+
+        ResponseEntity<?> statusResponse = prescriptionService.savePrescription(prescription);
 
         // If changing the appointment status failed,
         // don't save the prescription

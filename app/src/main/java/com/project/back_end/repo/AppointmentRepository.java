@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.back_end.model.Appointment;
+import com.project.back_end.models.Appointment;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {

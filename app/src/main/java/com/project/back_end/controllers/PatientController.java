@@ -1,7 +1,7 @@
 package com.project.back_end.controllers;
 
 import com.project.back_end.DTO.Login;
-import com.project.back_end.entities.Patient;
+import com.project.back_end.models.Patient;
 import com.project.back_end.services.PatientService;
 import com.project.back_end.services.Service;
 import jakarta.validation.Valid;
@@ -35,7 +35,9 @@ public class PatientController {
             return validation;
         }
 
-        return patientService.getPatientDetails(token);
+        return ResponseEntity.ok(
+            patientService.getPatientDetails(token)
+        );
     }
 
     // POST create patient
@@ -43,7 +45,10 @@ public class PatientController {
     public ResponseEntity<?> createPatient(
             @Valid @RequestBody Patient patient) {
 
-        boolean valid = service.validatePatient(patient);
+        boolean valid = service.validatePatient(
+            patient.getEmail(),
+            patient.getPhone()
+        );
 
         if (!valid) {
             return ResponseEntity.status(409).body(
@@ -78,7 +83,10 @@ public class PatientController {
     public ResponseEntity<?> login(
             @Valid @RequestBody Login login) {
 
-        return service.validatePatientLogin(login);
+        return service.validatePatientLogin(
+            login.getEmail(),
+            login.getPassword()
+        );
     }
 
     // GET patient appointments
@@ -94,7 +102,9 @@ public class PatientController {
             return validation;
         }
 
-        return patientService.getPatientAppointment(patientId);
+        return ResponseEntity.ok(
+            patientService.getPatientAppointment(patientId)
+        );
     }
 
     // GET filtered patient appointments

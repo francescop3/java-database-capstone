@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.project.back_end.model.Prescription;
+import com.project.back_end.models.Prescription;
 import com.project.back_end.repo.PrescriptionRepository;
 
 @Service

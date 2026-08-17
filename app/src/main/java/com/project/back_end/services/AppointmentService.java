@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.back_end.DTO.AppointmentDTO;
-import com.project.back_end.model.Appointment;
-import com.project.back_end.model.Doctor;
-import com.project.back_end.model.Patient;
+import com.project.back_end.models.Appointment;
+import com.project.back_end.models.Doctor;
+import com.project.back_end.models.Patient;
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
@@ -80,16 +80,12 @@ public class AppointmentService {
     }
 
     @Transactional
-    public String cancelAppointment(Long appointmentId, Long patientId) {
+    public String cancelAppointment(Long appointmentId) {
         try {
             Appointment appointment = appointmentRepository.findById(appointmentId).orElse(null);
 
             if (appointment == null) {
                 return "Appointment not found.";
-            }
-
-            if (!appointment.getPatient().getId().equals(patientId)) {
-                return "Patient ID does not match.";
             }
 
             appointmentRepository.delete(appointment);

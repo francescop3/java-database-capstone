@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.back_end.model.Appointment;
-import com.project.back_end.model.Doctor;
+import com.project.back_end.models.Appointment;
+import com.project.back_end.models.Doctor;
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 
@@ -119,7 +119,7 @@ public class DoctorService {
             return "Invalid email or password.";
         }
 
-        return tokenService.generateToken(doctor.getId(), "doctor");
+        return tokenService.generateToken(doctor.getEmail(), "doctor");
     }
 
     @Transactional

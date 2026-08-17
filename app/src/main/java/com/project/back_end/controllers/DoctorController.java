@@ -1,13 +1,15 @@
 package com.project.back_end.controllers;
 
 import com.project.back_end.DTO.Login;
-import com.project.back_end.entities.Doctor;
+import com.project.back_end.models.Doctor;
 import com.project.back_end.services.DoctorService;
 import com.project.back_end.services.Service;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +31,7 @@ public class DoctorController {
     public ResponseEntity<?> getDoctorAvailability(
             @PathVariable String user,
             @PathVariable Long doctorId,
-            @PathVariable String date,
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             @PathVariable String token) {
 
         ResponseEntity<?> validation = service.validateToken(token, user);
@@ -38,7 +40,9 @@ public class DoctorController {
             return validation;
         }
 
-        return doctorService.getDoctorAvailability(doctorId, date);
+        return ResponseEntity.ok(
+            doctorService.getDoctorAvailability(doctorId, date)
+        );
     }
 
     // GET all doctors
@@ -89,7 +93,12 @@ public class DoctorController {
     public ResponseEntity<?> doctorLogin(
             @Valid @RequestBody Login login) {
 
-        return doctorService.validateDoctor(login);
+        return ResponseEntity.ok(
+            doctorService.validateDoctor(
+                login.getEmail(), 
+                login.getPassword()
+            )
+        );
     }
 
     // PUT update doctor
@@ -161,6 +170,8 @@ public class DoctorController {
             @PathVariable String time,
             @PathVariable String speciality) {
 
-        return service.filterDoctor(name, time, speciality);
+        return ResponseEntity.ok(
+            service.filterDoctor(name, time, speciality)
+        );
     }
 }
